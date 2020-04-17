@@ -2,23 +2,23 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
         byte opt=0;
-        Empresa empresa = new Empresa();
+        Empresa Empresa = new Empresa("Telecorp");
+
 
         do{
             opt= Byte.parseByte(JOptionPane.showInputDialog(Menu()));
 
             switch (opt){
-                case 1:
-                    String Name = JOptionPane.showInputDialog("Digite el nombre del empleado");
-                    String WorkStation= JOptionPane.showInputDialog("Digite EL puesto de trabajo del empleado");
-                    double Salary= Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Salario del empleado"));
 
+                case 1:   AñadirEmpleado(Empresa);break;
 
+                case 2:   JOptionPane.showMessageDialog(null,Empresa.toString());
 
                     break;
             }
@@ -37,4 +37,16 @@ public class Main {
                 "5. Mostrar Totales \n" +
                 "7. Salir";
     }
+
+    public  static void AñadirEmpleado(Empresa Empleado) {
+
+        String Name = JOptionPane.showInputDialog("Digite el nombre del empleado");
+        String WorkStation = JOptionPane.showInputDialog("Digite EL puesto de trabajo del empleado");
+        double Salary = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Salario del empleado"));
+
+        Empleado Emp=new Empleado(Name,WorkStation,Salary){};
+
+        Empleado.addEmpleado(Emp);
+    }
+
 }

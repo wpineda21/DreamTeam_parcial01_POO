@@ -15,6 +15,7 @@ public abstract class Empleado {
         Documents=new ArrayList<>();
     }
 
+
     public void AddDocument(){
 
     }
@@ -41,5 +42,15 @@ public abstract class Empleado {
 
     public void setSalary(double salary) {
         Salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "Name='" + Name + '\'' +
+                ", puesto='" + puesto + '\'' +
+                ", Documents=" + Documents +
+                ", Salary=" + Salary +
+                '}';
     }
 }
