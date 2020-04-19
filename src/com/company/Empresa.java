@@ -1,37 +1,43 @@
 package com.company;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Empresa {
-    private String NombreEmpresa;
-    private ArrayList<Empleado> Payroll;
+    private String nombre;
+    public ArrayList<Empleado> planilla;
 
-    public Empresa(String nombreEmpresa) {
-        NombreEmpresa = nombreEmpresa;
-        Payroll= new ArrayList<>();
+    public Empresa(String nombre) {
+        this.nombre = nombre;
+        planilla = new ArrayList<Empleado>();
     }
 
-    public void addEmpleado(Empleado Empleado){
-        Payroll.add(Empleado);
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public void QuitEmpleado(String s){
-
+    public void addEmpleado(Empleado empleado){
+        planilla.add(empleado);
     }
 
-    public String getNombreEmpresa() {
-        return NombreEmpresa;
-    }
-
-    public ArrayList<Empleado> getPayroll() {
-        return Payroll;
+    public void quitEmpleado(String nombre) {
+        Empleado aux1=null;
+        for (Empleado emp:planilla ) {
+            if (emp.getName().equalsIgnoreCase(nombre))
+                aux1=emp;
+        }
+        if (aux1!=null){
+            planilla.remove(aux1);
+            JOptionPane.showMessageDialog(null,"Proceso Realizado con Exito");
+        }
     }
 
     @Override
     public String toString() {
-        return "Empresa{" +
-                "NombreEmpresa='" + NombreEmpresa + '\'' +
-                ", Payroll=" + Payroll +
-                '}';
+        return "Nombre de la Empresa: " + nombre + '\n'+
+                "Planilla: \n" + planilla ;
     }
 }

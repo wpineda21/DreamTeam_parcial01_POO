@@ -15,13 +15,9 @@ public abstract class Empleado {
         Documents=new ArrayList<>();
     }
 
-
     public void AddDocument(){
-
     }
-
     public void RemoveDocument(){
-
     }
 
     public String getName() {
@@ -46,11 +42,10 @@ public abstract class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" +
-                "Name='" + Name + '\'' +
-                ", puesto='" + puesto + '\'' +
-                ", Documents=" + Documents +
-                ", Salary=" + Salary +
-                '}';
+        return "Empleado: " +
+                "\n Nombre del empleado : " + Name  +
+                "\n Puesto: " + puesto +
+                "\n Documentos :" + Documents +
+                "\n Salario: " + Salary ;
     }
 }
