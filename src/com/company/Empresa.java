@@ -26,7 +26,8 @@ public class Empresa {
         Empleado empleado=null;
         boolean var=false;
         String empleadoFinal=nombreEmpleado;
-        if(planilla.removeIf(obj-> obj.getNombre().equals(empleadoFinal))==true){
+        if(planilla.removeIf(obj-> obj.getNombre().equalsIgnoreCase(empleadoFinal))==true){
+                JOptionPane.showMessageDialog(null,"Empleado Despedido con exito");
                 var=true;
             }
         if(var!=true){
@@ -42,10 +43,11 @@ public class Empresa {
                 throw new ListException("No Hay Empleados a Mostrar por el momento");
             }
     }
+
     public void conocerSalario(String nombre) throws EmployException{
         Empleado empleado=null;
         for(Empleado e: planilla){
-                if(e.getNombre().equals(nombre))
+                if(e.getNombre().equalsIgnoreCase(nombre))
                     empleado = e;
             }
         if (empleado==null){
