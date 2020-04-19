@@ -29,12 +29,10 @@ public class Main {
                             double salario;
                          Empresa.planilla.forEach(obj->{
                              if(obj.getName().equalsIgnoreCase(SearchName)){
-
                              }
 
                         });break;
             }
-
 
         }while(opt!=7);
 
@@ -43,7 +41,7 @@ public class Main {
     static String Menu(){
         return "Bienvenido a la empresa \n"+
                 "Seleccione un opcion\n"+
-                "1. Agregar empleado\n" +
+                    "1. Agregar empleado\n" +
                 "2. Despedir empleado\n" +
                 "3. Ver lista de empleados\n" +
                 "4. calcular sueldos\n" + //un empleado
