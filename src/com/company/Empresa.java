@@ -14,7 +14,6 @@ public class Empresa {
         planilla = new ArrayList<Empleado>();
     }
 
-
     public String getNombre() {
         return nombre;
     }
@@ -23,21 +22,36 @@ public class Empresa {
         planilla.add(empleado);
     }
 
-    public void quitEmpleado(String nombre) {
-        Empleado aux1=null;
-        for (Empleado emp:planilla ) {
-            if (emp.getName().equalsIgnoreCase(nombre))
-                aux1=emp;
+    public void quitEmpleado(String nombreEmpleado) throws EmployException{
+        Empleado empleado=null;
+        boolean var=false;
+        String empleadoFinal=nombreEmpleado;
+        if(planilla.removeIf(obj-> obj.getNombre().equals(empleadoFinal))==true){
+            var=true;
         }
-        if (aux1!=null){
-            planilla.remove(aux1);
-            JOptionPane.showMessageDialog(null,"Proceso Realizado con Exito");
+        if(var!=true){
+            throw  new  EmployException("El Empleado a despedir no existe");
         }
     }
 
-    @Override
-    public String toString() {
-        return "Nombre de la Empresa: " + nombre + '\n'+
-                "Planilla: \n" + planilla ;
+    public void mostrarEmpleados() throws ListException{
+        for(Empleado aux : planilla){
+            JOptionPane.showMessageDialog(null, aux);
+        }
+        if (planilla.isEmpty()){
+            throw new ListException("No Hay Empleados a Mostrar por el momento");
+        }
+    }
+    public void conocerSalario(String nombre) throws EmployException{
+        Empleado empleado=null;
+        for(Empleado e: planilla){
+            if(e.getNombre().equals(nombre))
+                empleado = e;
+        }
+        if (empleado==null){
+            throw new  EmployException("No Existe Empleado; por favor Ingrese Otro");
+        }
+        double Neto= CalculadoraImpuestos.calcularPago(empleado);
+        JOptionPane.showConfirmDialog(null,"Pagar a: "+ nombre +" la cantidad de $:"+ Neto);
     }
 }

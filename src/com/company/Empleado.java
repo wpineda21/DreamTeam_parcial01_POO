@@ -1,51 +1,47 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Empleado {
-    protected String Name;
+abstract class Empleado {
+    protected String nombre;
     protected String puesto;
-    protected ArrayList<Documento> Documents;
-    protected double Salary;
+    protected ArrayList<Documento> documentos;
+    protected double salario;
 
-    public Empleado(String name, String puesto, double salary) {
-        Name = name;
+    public Empleado(String nombre, String puesto, double salario) {
+        this.nombre = nombre;
         this.puesto = puesto;
-        Salary = salary;
-        Documents=new ArrayList<>();
+        this.salario = salario;
+        documentos = new ArrayList<Documento>();
     }
 
-    public void AddDocument(){
-    }
-    public void RemoveDocument(){
-    }
-
-    public String getName() {
-        return Name;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getPuesto() {
         return puesto;
     }
 
-    public ArrayList<Documento> getDocuments() {
-        return Documents;
+    public List<Documento> getDocumento() {
+        return documentos;
     }
 
-    public double getSalary() {
-        return Salary;
+    public void addDocumento(Documento d){
+        documentos.add(d);
     }
 
-    public void setSalary(double salary) {
-        Salary = salary;
+    public void removeDocumento(String d){
+        String dFinal=d;
+        documentos.removeIf(s-> s.getNombre().equals(dFinal));
     }
 
-    @Override
-    public String toString() {
-        return "Empleado: " +
-                "\n Nombre del empleado : " + Name  +
-                "\n Puesto: " + puesto +
-                "\n Documentos :" + Documents +
-                "\n Salario: " + Salary ;
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
     }
 }

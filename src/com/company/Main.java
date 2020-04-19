@@ -6,81 +6,94 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        byte opt=0;
-        Empresa Empresa = new Empresa(JOptionPane.showInputDialog("Ingrese El nombre de la Empresa"));
+        boolean salir = false;
+        int mesesContrato = 0, extension = 0;
+        String menu = "Opciones: \n" +
+                "1) Agregar Empleado\n" +
+                "2) Despedir Empleado\n" +
+                "3) Ver lista de empleados\n" +
+                "4) Calcular sueldo\n" +
+                "5) Mostrar totales\n" +
+                "6) Salir";
 
-        do{
-            opt= Byte.parseByte(JOptionPane.showInputDialog(Menu()));
+        String nombre = "";
+        String nomEmpresa = "";
+        String puesto = "";
+        String numero = "";
+        double salario = 0;
+        Empresa empresa = null;
+        Documento documento = null;
+        Empleado empleado = null;
 
-            switch (opt){
+        nomEmpresa = JOptionPane.showInputDialog(null, "Empresa");
+        empresa = new Empresa(nomEmpresa);
 
-                case  1:  Empleado contrato = AñadirEmpleado();
-                          Empresa.addEmpleado(contrato);break;
-                case 2:   String Nombre=JOptionPane.showInputDialog("Ingrese el Nombre del Empleado a despedir");
-                          Empresa.quitEmpleado(Nombre);
-                          JOptionPane.showMessageDialog(null,"Elminado con Exito de la lista");
-                          break;
-                case 3:  JOptionPane.showMessageDialog(null,"A continuacion Se Motrar Los Empleados Pertenecientes a: " +
-                        ""+Empresa.getNombre());
-                         JOptionPane.showMessageDialog(null,Empresa.toString());
-                         break;
-                case 4:  String SearchName=JOptionPane.showInputDialog("Igrese el nombre del Empleado porfavor");
-                            Empleado empl=null;
-                            double salario;
-                         Empresa.planilla.forEach(obj->{
-                             if(obj.getName().equalsIgnoreCase(SearchName)){
-                             }
+        String opt;
+        do {
+            opt = JOptionPane.showInputDialog(null, menu);
+            switch (opt) {
+                case "1":
 
-                        });break;
+                    nombre = JOptionPane.showInputDialog(null, "Nombre ");
+                    numero = JOptionPane.showInputDialog(null, "Carnet ");
+
+                    String[] opcion = {"Servicio Profesional", "Plaza Fija"};
+                    int aux = JOptionPane.showOptionDialog(null, "Tipo de trabajador", "Agregar empleado",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcion, opcion[0]);
+
+                    if (aux == 0) {
+                        puesto = JOptionPane.showInputDialog(null, "Puesto de trabajo");
+                        salario = Integer.parseInt(JOptionPane.showInputDialog(null, "Salario en dólares "));
+                        mesesContrato = Integer.parseInt(JOptionPane.showInputDialog(null, "Meses de contrato"));
+                        documento = new Documento(nombre, numero);
+                        empleado = new ServicioProfesional(nombre, puesto, salario, mesesContrato);
+                        empleado.addDocumento(documento);
+                        empresa.addEmpleado(empleado);
+                    } else {
+                        puesto = JOptionPane.showInputDialog(null, "Puesto de trabajo");
+                        salario = Integer.parseInt(JOptionPane.showInputDialog(null, "Salario en dólares"));
+                        extension = Integer.parseInt(JOptionPane.showInputDialog(null, "Extensión (Telefono)"));
+                        documento = new Documento(nombre, numero);
+                        empleado = new PlazaFija(nombre, puesto, salario, extension);
+                        empleado.addDocumento(documento);
+                        empresa.addEmpleado(empleado);
+                    }
+                    break;
+
+                case "2":
+                    try {
+                        nombre = JOptionPane.showInputDialog(null, "Empleado a despedir");
+                        empresa.quitEmpleado(nombre);
+                        empleado.removeDocumento(nombre);
+                    }catch (EmployException e){
+                        JOptionPane.showMessageDialog(null,e.getMessage());
+                    }
+                    break;
+                case "3":
+                    try {
+                        empresa.mostrarEmpleados();
+                    }catch(ListException e){
+                        JOptionPane.showMessageDialog(null,e.getMessage());
+                    }
+                    break;
+                case "4":
+                    try {
+                        nombre = JOptionPane.showInputDialog("ingrese el nombre del empleado :");
+                        empresa.conocerSalario(nombre);
+                    }catch (EmployException e){
+                        JOptionPane.showMessageDialog(null,e.getMessage());
+                    }
+                    break;
+                case "5":
+                    CalculadoraImpuestos.mostrarTotales();
+                    break;
+                case "6":
+                    JOptionPane.showMessageDialog(null, "Saliendo !!! ");
+                    salir=true;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opcion incorrecta!");
             }
-
-        }while(opt!=7);
-
+        } while (salir!=true);
     }
-
-    static String Menu(){
-        return "Bienvenido a la empresa \n"+
-                "Seleccione un opcion\n"+
-                    "1. Agregar empleado\n" +
-                "2. Despedir empleado\n" +
-                "3. Ver lista de empleados\n" +
-                "4. calcular sueldos\n" + //un empleado
-                "5. Mostrar Totales \n" + //toda la empresa
-                "7. Salir";
-    }
-
-    public  static Empleado AñadirEmpleado() {
-        byte Opt=0;
-        Empleado Emp=null;
-        String Name = JOptionPane.showInputDialog("Digite el nombre del empleado");
-        String WorkStation = JOptionPane.showInputDialog("Digite EL puesto de trabajo del empleado");
-        double Salary = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Salario del empleado"));
-        Opt = Byte.parseByte(JOptionPane.showInputDialog("Ingreese El Tipo de Empleado a contratar:\n"+"1.Servicio Profesional\n"+"2.Plaza fija"));
-
-        if(Opt == 1){
-            int MesesdeContrato=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de meses a contratar al Empleado: "));
-            Emp = new ServicioProfesional(Name,WorkStation,Salary,MesesdeContrato);
-
-        }else if(Opt==2){
-            int ExtensioTelf=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el Numero De Extension Telefonica del Nuevo Empleado "));
-            Emp= new PlazaFija(Name,WorkStation,Salary,ExtensioTelf);
-        }
-        return Emp;
-    }
-
-    public double CalcularSalario(String name, ArrayList plan){
-
-        double salario;
-
-        plan.forEach(obj->{
-            if (obj..equalsIgnoreCase(name)){
-
-            }
-        });
-
-
-
-        return 2.0;
-    }
-
 }
