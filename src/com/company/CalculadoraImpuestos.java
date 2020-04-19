@@ -10,20 +10,15 @@ public class CalculadoraImpuestos {
     private CalculadoraImpuestos(){ }
 
     public static double calcularPago(Empleado empleado) {
-        double Neto=0;
-        double Salario= empleado.getSalario();
-
+        double Neto=0,Salario= empleado.getSalario();
         if(empleado instanceof ServicioProfesional){
             double renta = (Salario * 0.1);
             totalRenta += renta;
             Neto= (Salario - renta);
         }
         else if(empleado instanceof PlazaFija) {
-            double renta1 = 0;
-            double Afp = (0.0625 * Salario);
-            double Isss = (0.03 * Salario);
-            double Restante = (Salario - Afp - Isss);
-
+            double renta1 = 0,Afp = (0.0625 * Salario);
+            double Isss = (0.03 * Salario),Restante = (Salario - Afp - Isss);
             if (Restante >= 0.01 && Restante <= 472.00) {
                 renta1 = 0;
             } else if (Restante >= 472.01 && Restante <= 895.24) {

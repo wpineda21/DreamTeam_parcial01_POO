@@ -15,6 +15,7 @@ public class PlazaFija extends Empleado {
     public void setExtension(int extension) {
         this.extension = extension;
     }
+
     public String mostrarDocs(){
         String mensaje="";
         for(Documento d : documentos){
