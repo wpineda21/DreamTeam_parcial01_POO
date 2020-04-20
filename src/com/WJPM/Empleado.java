@@ -1,9 +1,9 @@
-package com.company;
+package com.WJPM;
 
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Empleado {
+  abstract class Empleado {
     protected String nombre;
     protected String puesto;
     protected ArrayList<Documento> documentos;

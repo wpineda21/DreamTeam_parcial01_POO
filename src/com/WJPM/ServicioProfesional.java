@@ -1,4 +1,4 @@
-package com.company;
+package com.WJPM;
 
 public class ServicioProfesional extends Empleado {
     private int mesesContrato;

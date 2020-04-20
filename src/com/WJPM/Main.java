@@ -1,4 +1,4 @@
-package com.company;
+package com.WJPM;
 
 import javax.swing.*;
 
@@ -46,7 +46,7 @@ public class Main {
 
                         if (aux == 0) {
                             puesto = JOptionPane.showInputDialog(null, "Puesto de trabajo");
-                            salario = Integer.parseInt(JOptionPane.showInputDialog(null, "Salario en dólares "));
+                            salario = Double.parseDouble(JOptionPane.showInputDialog(null, "Salario en dólares "));
                             MesesContrato = Integer.parseInt(JOptionPane.showInputDialog(null, "Meses de contrato"));
                             documento = new Documento(nombre, numero);
                             empleado = new ServicioProfesional(nombre, puesto, salario, MesesContrato);
@@ -54,7 +54,7 @@ public class Main {
                             empresa.addEmpleado(empleado);
                         } else {
                             puesto = JOptionPane.showInputDialog(null, "Puesto de trabajo");
-                            salario = Integer.parseInt(JOptionPane.showInputDialog(null, "Salario en dólares"));
+                            salario = Double.parseDouble(JOptionPane.showInputDialog(null, "Salario en dólares"));
                             extension = Integer.parseInt(JOptionPane.showInputDialog(null, "Extensión (Telefono)"));
                             documento = new Documento(nombre, numero);
                             empleado = new PlazaFija(nombre, puesto, salario, extension);

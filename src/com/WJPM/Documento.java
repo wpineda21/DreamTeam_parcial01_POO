@@ -1,4 +1,4 @@
-package com.company;
+package com.WJPM;
 
 public class Documento {
     protected  String nombre;

@@ -1,9 +1,7 @@
-package com.company;
+package com.WJPM;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Empresa {
     private String nombre;

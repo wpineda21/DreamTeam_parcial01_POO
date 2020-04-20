@@ -1,4 +1,4 @@
-package com.company;
+package com.WJPM;
 
 public class PlazaFija extends Empleado {
     private int extension;
